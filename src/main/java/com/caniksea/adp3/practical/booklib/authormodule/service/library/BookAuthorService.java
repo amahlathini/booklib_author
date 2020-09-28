@@ -2,6 +2,8 @@ package com.caniksea.adp3.practical.booklib.authormodule.service.library;
 
 import com.caniksea.adp3.practical.booklib.authormodule.domain.library.BookAuthor;
 
+import java.util.Set;
+
 /**
  * Instructions
  *   > Your repository should be implemented based on your repository.
@@ -15,6 +17,7 @@ import com.caniksea.adp3.practical.booklib.authormodule.domain.library.BookAutho
  *
  */
 public interface BookAuthorService {
+    Set<BookAuthor> getAll();
     BookAuthor create(BookAuthor bookAuthor);
     BookAuthor read(String bookId, String authorId);
     void delete(String bookId, String authorId);

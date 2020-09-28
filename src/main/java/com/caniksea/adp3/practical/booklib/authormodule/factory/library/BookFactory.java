@@ -1,6 +1,8 @@
 package com.caniksea.adp3.practical.booklib.authormodule.factory.library;
 
+import com.caniksea.adp3.practical.booklib.authormodule.domain.generic.Author;
 import com.caniksea.adp3.practical.booklib.authormodule.domain.library.Book;
+import com.caniksea.adp3.practical.booklib.authormodule.helper;
 
 public class BookFactory {
 
@@ -19,6 +21,13 @@ public class BookFactory {
      * @return
      */
     public static Book buildBook(String title, int year) { // DO NOT MODIFY THIS LINE.
-        throw new UnsupportedOperationException();
+        String bookId = helper.generateId();
+
+        Book book = new Book.Builder()
+                .setTitle(title)
+                .setId(bookId)
+                .setYear(year)
+                .build();
+        return book;
     }
 }

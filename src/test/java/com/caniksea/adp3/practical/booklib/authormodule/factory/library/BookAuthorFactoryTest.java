@@ -1,5 +1,6 @@
 package com.caniksea.adp3.practical.booklib.authormodule.factory.library;
 
+import com.caniksea.adp3.practical.booklib.authormodule.domain.library.BookAuthor;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -18,6 +19,9 @@ public class BookAuthorFactoryTest {
      */
     @Test
     public void buildBookAuthor() {
-        throw new UnsupportedOperationException();
+        BookAuthor bookAuthor = new BookAuthorFactory().buildBookAuthor("randomly-generated-Id", "randomly-generated-Id");
+        System.out.println(bookAuthor.getAuthorId());
+        System.out.println(bookAuthor.getBookId());
+        assertEquals("randomly-generated-Id", bookAuthor.getAuthorId());
     }
 }

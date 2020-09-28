@@ -3,6 +3,9 @@ package com.caniksea.adp3.practical.booklib.authormodule.repository.library.impl
 import com.caniksea.adp3.practical.booklib.authormodule.domain.library.Book;
 import com.caniksea.adp3.practical.booklib.authormodule.repository.library.BookRepository;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Instructions
  *  > Make sure you have read the instructions on IRepository.java before attempting the tasks below.
@@ -18,24 +21,54 @@ import com.caniksea.adp3.practical.booklib.authormodule.repository.library.BookR
  *
  */
 public class BookRepositoryImpl implements BookRepository {
+    private static BookRepository repository = null;
+    private Set<Book> bookDB;
+
+    private BookRepositoryImpl(){this.bookDB = new HashSet<>();
+    }
+
+    public static BookRepository getRepository(){
+        if (repository == null) repository = new BookRepositoryImpl();
+        return repository;
+    }
 
     @Override
     public Book create(Book book) {
-        throw new UnsupportedOperationException();
+        this.bookDB.add(book);
+        return book;
     }
 
     @Override
     public Book update(Book book) {
-        throw new UnsupportedOperationException();
+        delete(book.getId());
+        this.bookDB.add(book);
+        return book;
     }
 
     @Override
     public Book read(String s) {
-        throw new UnsupportedOperationException();
+        Book book = this.bookDB
+                .stream()
+                .filter(a -> a
+                        .getId()
+                        .trim()
+                        .equalsIgnoreCase(s)
+                )
+                .findAny()
+                .orElse(null);
+        return book;
     }
 
     @Override
     public void delete(String s) {
-        throw new UnsupportedOperationException();
+        Book book = read(s);
+        if (book != null){
+            this.bookDB.remove(book);
+        }
+    }
+
+    @Override
+    public Set<Book> getAll() {
+        return this.bookDB;
     }
 }

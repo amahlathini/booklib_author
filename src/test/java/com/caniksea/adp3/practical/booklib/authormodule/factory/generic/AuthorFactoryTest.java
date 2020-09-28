@@ -1,5 +1,6 @@
 package com.caniksea.adp3.practical.booklib.authormodule.factory.generic;
 
+import com.caniksea.adp3.practical.booklib.authormodule.domain.generic.Author;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -10,6 +11,7 @@ import static org.junit.Assert.*;
  *  > Use appropriate assert method(s).
  *
  */
+
 public class AuthorFactoryTest {
 
     /**
@@ -18,6 +20,8 @@ public class AuthorFactoryTest {
      */
     @Test
     public void buildAuthor() {
-        throw new UnsupportedOperationException();
+        Author author = new AuthorFactory().buildAuthor("Ayabulela", "Mahlathini");
+        System.out.println("Author: " + author.getFirstName() +" "+author.getLastName());
+        assertEquals("Ayabulela Mahlathini", author.getFirstName()+ " " + author.getLastName());
     }
 }

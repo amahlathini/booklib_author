@@ -1,6 +1,15 @@
 package com.caniksea.adp3.practical.booklib.authormodule.repository.library.impl;
 
+import com.caniksea.adp3.practical.booklib.authormodule.domain.library.Book;
+import com.caniksea.adp3.practical.booklib.authormodule.domain.library.BookAuthor;
+import com.caniksea.adp3.practical.booklib.authormodule.factory.library.BookAuthorFactory;
+import com.caniksea.adp3.practical.booklib.authormodule.factory.library.BookFactory;
+import com.caniksea.adp3.practical.booklib.authormodule.repository.library.BookAuthorRepository;
+import com.caniksea.adp3.practical.booklib.authormodule.repository.library.BookRepository;
+import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.Set;
 
 import static org.junit.Assert.*;
 
@@ -23,18 +32,40 @@ import static org.junit.Assert.*;
  */
 public class BookAuthorRepositoryImplTest {
 
+    private static BookAuthorRepository repository = BookAuthorRepositoryImpl.getRepository();
+
+    private static BookAuthor bookAuthor = BookAuthorFactory.buildBookAuthor("Book-id", "authorId");
+
+
     @Test
-    public void create() {
-        throw new UnsupportedOperationException();
+    public void a_create() {
+        BookAuthor createdBookAuthor = repository.create(bookAuthor);
+        Assert.assertEquals(bookAuthor.getAuthorId(), createdBookAuthor.getAuthorId());
+        System.out.println("Created:" + createdBookAuthor);
+    }
+
+
+    @Test
+    public void c_read() {
+        BookAuthor readBookAuthor = repository.read(bookAuthor.getAuthorId(), bookAuthor.getBookId());
+        assertEquals(bookAuthor.getAuthorId(), readBookAuthor.getAuthorId());
+        System.out.println("Read:" + readBookAuthor);
     }
 
     @Test
-    public void read() {
-        throw new UnsupportedOperationException();
+    public void d_getAll(){
+        Set<BookAuthor> bookAuthors = repository.getAll();
+        assertEquals(1, bookAuthors.size());
+
+        System.out.println("Get All: " + bookAuthors);
     }
 
     @Test
-    public void delete() {
-        throw new UnsupportedOperationException();
-    }
+    public void e_delete() {
+        String bookAuthorToDel = bookAuthor.getAuthorId();
+        repository.delete(bookAuthorToDel);
+        Set<BookAuthor> bookAuthors = repository.getAll();
+        assertEquals(0, bookAuthors.size());
+
+        System.out.println("Deleted: " + bookToDel);
 }

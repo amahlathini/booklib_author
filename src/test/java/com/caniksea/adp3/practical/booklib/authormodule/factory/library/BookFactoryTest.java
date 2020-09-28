@@ -1,5 +1,6 @@
 package com.caniksea.adp3.practical.booklib.authormodule.factory.library;
 
+import com.caniksea.adp3.practical.booklib.authormodule.domain.library.Book;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -19,6 +20,10 @@ public class BookFactoryTest {
      */
     @Test
     public void buildBook() {
-        throw new UnsupportedOperationException();
+        Book book = new BookFactory().buildBook("How I Became A Billionare at 30", 2025);
+
+        System.out.println("Title: " +book.getTitle());
+        System.out.println("Year: "+book.getYear());
+        assertEquals(2025, book.getYear());
     }
 }

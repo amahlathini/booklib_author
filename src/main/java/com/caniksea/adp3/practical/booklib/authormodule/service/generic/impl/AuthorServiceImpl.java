@@ -1,7 +1,11 @@
 package com.caniksea.adp3.practical.booklib.authormodule.service.generic.impl;
 
 import com.caniksea.adp3.practical.booklib.authormodule.domain.generic.Author;
+import com.caniksea.adp3.practical.booklib.authormodule.repository.generic.AuthorRepository;
+import com.caniksea.adp3.practical.booklib.authormodule.repository.generic.impl.AuthorRepositoryImpl;
 import com.caniksea.adp3.practical.booklib.authormodule.service.generic.AuthorService;
+
+import java.util.Set;
 
 /**
  * Instructions
@@ -19,23 +23,40 @@ import com.caniksea.adp3.practical.booklib.authormodule.service.generic.AuthorSe
  */
 public class AuthorServiceImpl implements AuthorService {
 
+    private static AuthorService service = null;
+    private AuthorRepository repository;
+
+    private AuthorServiceImpl(){ this.repository = AuthorRepositoryImpl.getRepository();
+    }
+
+    public static AuthorService getService(){
+        if (service == null) service = new AuthorServiceImpl();
+        return service;
+    }
+
+    @Override
+    public Set<Author> getAll() {
+        return this.repository.getAll();
+    }
+
+
     @Override
     public Author create(Author author) {
-        throw new UnsupportedOperationException();
+        return this.repository.create(author);
+    }
+
+    @Override
+    public Author read(String id) {
+        return this.repository.read(id);
     }
 
     @Override
     public Author update(Author author) {
-        throw new UnsupportedOperationException();
+        return this.repository.update(author);
     }
 
     @Override
-    public Author read(String s) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void delete(String s) {
-        throw new UnsupportedOperationException();
+    public void delete(String id) {
+        this.repository.delete(id);
     }
 }

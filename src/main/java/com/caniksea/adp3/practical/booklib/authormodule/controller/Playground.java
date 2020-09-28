@@ -1,7 +1,13 @@
 package com.caniksea.adp3.practical.booklib.authormodule.controller;
 
+import com.caniksea.adp3.practical.booklib.authormodule.domain.generic.Author;
+import com.caniksea.adp3.practical.booklib.authormodule.domain.library.BookAuthor;
+import com.caniksea.adp3.practical.booklib.authormodule.service.generic.impl.AuthorServiceImpl;
+import com.caniksea.adp3.practical.booklib.authormodule.service.library.impl.BookAuthorServiceImpl;
+
 import java.math.BigDecimal;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Instructions:
@@ -9,6 +15,7 @@ import java.util.Set;
  *  > Do not modify class signature.
  *
  */
+
 public class Playground {
 
     /**
@@ -19,8 +26,25 @@ public class Playground {
      * @param bookId
      * @return
      */
-    Set<String> getBookAuthorsLastName(String bookId) {
-        throw new UnsupportedOperationException();
+
+    private BookAuthorServiceImpl bookAuthorService;
+    private AuthorServiceImpl authorService;
+    Set<BookAuthor> getBookAuthorsLastName(String bookId) {
+        /*Set<BookAuthor> bookAuthors = bookAuthorService.getAll();
+        Set<BookAuthor> bookAuthorSet;
+
+        bookAuthorSet = bookAuthors.stream()
+                .filter(o -> o
+                        .getBookId()
+                        .trim()
+                        .equalsIgnoreCase(bookId))
+                .collect(Collectors.toSet());
+        Set<Author> authorSet = authorService.getAll()
+                Set<Author> authors;
+        authors = authorSet.stream().filter(a -> a.getId().equalsIgnoreCase(bookAuthorSet.stream().filter(a -> a.getAuthorId().)))
+        return bookAuthorSet;*/
+        return null;
+
     }
 
     /**

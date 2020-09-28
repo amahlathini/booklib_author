@@ -1,6 +1,8 @@
 package com.caniksea.adp3.practical.booklib.authormodule.factory.library;
 
+import com.caniksea.adp3.practical.booklib.authormodule.domain.generic.Author;
 import com.caniksea.adp3.practical.booklib.authormodule.domain.library.BookAuthor;
+import com.caniksea.adp3.practical.booklib.authormodule.helper;
 
 public class BookAuthorFactory {
 
@@ -17,6 +19,11 @@ public class BookAuthorFactory {
      * @return
      */
     public static BookAuthor buildBookAuthor(String bookId, String authorId) { // DO NOT MODIFY THIS LINE.
-        throw new UnsupportedOperationException();
+
+        BookAuthor bookAuthor = new BookAuthor.Builder()
+                .setBookId(bookId)
+                .setAuthorId(authorId)
+                .build();
+        return bookAuthor;
     }
 }

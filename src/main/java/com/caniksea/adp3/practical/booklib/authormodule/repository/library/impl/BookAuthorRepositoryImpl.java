@@ -3,6 +3,9 @@ package com.caniksea.adp3.practical.booklib.authormodule.repository.library.impl
 import com.caniksea.adp3.practical.booklib.authormodule.domain.library.BookAuthor;
 import com.caniksea.adp3.practical.booklib.authormodule.repository.library.BookAuthorRepository;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Instructions
  *  > Make sure you have read the instructions on IRepository.java before attempting the tasks below.
@@ -25,18 +28,56 @@ import com.caniksea.adp3.practical.booklib.authormodule.repository.library.BookA
  */
 public class BookAuthorRepositoryImpl implements BookAuthorRepository {
 
+    private static BookAuthorRepository repository = null;
+    private Set<BookAuthor> bookAuthorDB;
+
+    private BookAuthorRepositoryImpl(){this.bookAuthorDB = new HashSet<>();
+    }
+
+    public static BookAuthorRepository getRepository(){
+        if (repository == null) repository = new BookAuthorRepositoryImpl();
+        return repository;
+    }
+
     @Override
     public BookAuthor create(BookAuthor bookAuthor) {
-        throw new UnsupportedOperationException();
+        this.bookAuthorDB.add(bookAuthor);
+        return bookAuthor;
     }
 
     @Override
     public BookAuthor read(String bookId, String authorId) {
-        throw new UnsupportedOperationException();
+        BookAuthor bookAuthor = this.bookAuthorDB
+                .stream()
+                .filter(a -> a
+                        .getAuthorId()
+                        .trim()
+                        .equalsIgnoreCase(authorId)
+                )
+                .findAny()
+                .orElse(this.bookAuthorDB
+                        .stream()
+                        .filter(b -> b
+                                .getBookId()
+                                .trim()
+                                .equalsIgnoreCase(bookId))
+                        .findAny()
+                        .orElse(null));
+        return bookAuthor;
     }
 
     @Override
     public void delete(String bookId, String authorId) {
-        throw new UnsupportedOperationException();
+        BookAuthor bookAuthor = read(bookId, authorId);
+        if (bookAuthor != null){
+            this.bookAuthorDB.remove(bookAuthor);
+        }
+    }
+
+
+
+    @Override
+    public Set<BookAuthor> getAll() {
+        return this.bookAuthorDB;
     }
 }

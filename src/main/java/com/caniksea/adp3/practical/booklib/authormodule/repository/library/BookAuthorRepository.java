@@ -1,6 +1,11 @@
 package com.caniksea.adp3.practical.booklib.authormodule.repository.library;
 
+import com.caniksea.adp3.practical.booklib.authormodule.domain.generic.Author;
+import com.caniksea.adp3.practical.booklib.authormodule.domain.library.Book;
 import com.caniksea.adp3.practical.booklib.authormodule.domain.library.BookAuthor;
+
+import java.util.HashMap;
+import java.util.Set;
 
 /**
  * Instructions
@@ -15,6 +20,7 @@ import com.caniksea.adp3.practical.booklib.authormodule.domain.library.BookAutho
  *
  */
 public interface BookAuthorRepository {
+    Set<BookAuthor> getAll();
     BookAuthor create(BookAuthor bookAuthor);
     BookAuthor read(String bookId, String authorId);
     void delete(String bookId, String authorId);
